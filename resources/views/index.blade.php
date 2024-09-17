@@ -13,6 +13,7 @@
                             <p class="card-text">{{ Str::limit($article->content, 200) }}</p>
                             <p class="badge badge-primary">{{ $article->source }}</p>
                             <a href="{{ $article->url }}" class="btn btn-primary">Read More</a>
+                            <a href="{{ route('details', $article->id) }}" class="btn btn-secondary float-right">Details</a>
                         </div>
                     </div>
                 </div>

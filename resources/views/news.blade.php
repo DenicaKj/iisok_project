@@ -22,8 +22,8 @@
                                 <p class="card-text">{{ Str::limit($result['news2_content'], 200) }} <a href="{{ $result['news2_url'] }}" class="btn btn-primary">Read more</a></p>
 
                                 <div class="d-flex justify-content-between">
-                                    <p class="badge badge-primary">Similarity (Original): {{ $result['similarity_original'] }}</p>
-                                    <p class="badge badge-secondary">Similarity (Translated): {{ $result['similarity_translated'] }}</p>
+                                    <p class="badge badge-primary">Similarity (Original): {{ $result['similarity_original'] }}%</p>
+                                    <p class="badge badge-secondary">Similarity (Translated): {{ $result['similarity_translated'] }}%</p>
                                 </div>
                                 <a href="#" class="btn btn-secondary mt-2">Compare in Detail</a>
                             </div>

@@ -16,15 +16,22 @@
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">News Comparison</a>
+    <a class="navbar-brand" href="{{ route('index') }}">News Comparison</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{{ route('index') }}">Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('compare.form') }}">Compare Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('fetchNews') }}">Fetch News</a>
+            </li>
+            <!-- Add more items as needed -->
         </ul>
     </div>
 </nav>
