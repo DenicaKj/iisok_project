@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
     <h1 class="text-center mb-5">Article Details</h1>
 
     <div class="card mb-4">

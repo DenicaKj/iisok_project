@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Comparison;
+use App\Models\Like;
 use App\Models\NewsArticle;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Process;
@@ -310,10 +311,62 @@ class NewsController extends Controller
     }
 
     // Fetch the latest articles from the database
-    public function index()
+
+    public function index(Request $request)
     {
-        $storedArticles = NewsArticle::all();
-        return view('index',['storedArticles' => $storedArticles]);
+        $query = NewsArticle::query();
+
+        // Apply date filter
+        if ($request->filled('date_from') && $request->filled('date_to')) {
+            $query->whereBetween('created_at', [$request->date_from, $request->date_to]);
+        }
+
+        // Apply source filter
+        if ($request->filled('source')) {
+            $query->where('source', $request->source);
+        }
+
+        // Apply keyword search
+        if ($request->filled('keyword')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('content', 'like', '%' . $request->keyword . '%');
+            });
+        }
+
+        $articles = $query->get();
+
+        return view('index', compact('articles'));
     }
+
+    public function like($id)
+    {
+        $article = NewsArticle::findOrFail($id);
+        $user = auth()->user();
+
+        if ($user->likedArticles()->where('article_id', $id)->exists()) {
+            $user->likedArticles()->detach($id);
+        } else {
+            $user->likedArticles()->attach($id);
+        }
+
+        return redirect()->back();
+    }
+
+    public function bookmark($id)
+    {
+        $article = NewsArticle::findOrFail($id);
+        $user = auth()->user();
+
+        if ($user->bookmarkedArticles()->where('article_id', $id)->exists()) {
+            $user->bookmarkedArticles()->detach($id);
+        } else {
+            $user->bookmarkedArticles()->attach($id);
+        }
+
+        return redirect()->back();
+    }
+
+
 }
 

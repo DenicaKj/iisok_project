@@ -44,4 +44,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function likedArticles()
+    {
+        return $this->belongsToMany(NewsArticle::class, 'likes', 'user_id', 'article_id');
+    }
+
+    public function bookmarkedArticles()
+    {
+        return $this->belongsToMany(NewsArticle::class, 'bookmarks', 'user_id', 'article_id');
+    }
+
 }
