@@ -66,10 +66,6 @@ def load_input_data(file_path):
         sys.exit(1)
 
 if __name__ == "__main__":
-    #if len(sys.argv) < 2:
-    #    print("Error: No input file path provided.")
-    #    sys.exit(1)
-
     file_path = sys.argv[1]
     news_articles = load_input_data(file_path)
     results = compare_news_articles(news_articles)
