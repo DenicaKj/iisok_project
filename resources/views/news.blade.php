@@ -4,12 +4,6 @@
     <div class="container">
         <h1 class="text-center mb-5">Macedonian News Comparison</h1>
 
-        @if($fetchedNews)
-            <form action="{{ route('store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="articles" value="{{ json_encode($fetchedNews) }}">
-                <button type="submit" class="btn btn-info mt-3">Store Fetched Articles</button>
-            </form>
             <div class="row">
                 @foreach($news as $result)
                     <div class="col-md-6 mb-4">
